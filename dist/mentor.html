@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="30 天具身智能基础训练 Wiki：Linux、Python、PyTorch、视觉、ROS 2 与任务验收。"><meta name="theme-color" content="#123c35"><title>导师手册 · 具身智能基础训练营</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script></head>
+<body data-page="mentor.html"><a class="skip" href="#article">跳到正文</a><aside id="sidebar"><a class="brand" href="index.html"><span class="brand-mark">E<span>↗</span></span><span>具身智能<small>基础训练营 / WIKI</small></span></a><div class="sidebar-label">LEARNING PATH · 学习路径</div><nav aria-label="课程目录"><a class="nav-link " href="index.html" ><span class="nav-num">01</span><span>开始学习<small>课程总览</small></span><span class="read-dot" data-page="index.html"></span></a><a class="nav-link " href="schedule.html" ><span class="nav-num">02</span><span>30 天日程<small>每天的学习目标</small></span><span class="read-dot" data-page="schedule.html"></span></a><a class="nav-link " href="foundations.html" ><span class="nav-num">03</span><span>Linux 与 Python<small>M1–M2 · 开发基础</small></span><span class="read-dot" data-page="foundations.html"></span></a><a class="nav-link " href="learning-vision.html" ><span class="nav-num">04</span><span>机器学习与视觉<small>M3–M5 · 实验基础</small></span><span class="read-dot" data-page="learning-vision.html"></span></a><a class="nav-link " href="robotics.html" ><span class="nav-num">05</span><span>ROS 2 与具身智能<small>M6–M8 · 系统实践</small></span><span class="read-dot" data-page="robotics.html"></span></a><a class="nav-link " href="resources.html" ><span class="nav-num">06</span><span>学习资料<small>教材、文档与视频</small></span><span class="read-dot" data-page="resources.html"></span></a><a class="nav-link " href="assessment.html" ><span class="nav-num">07</span><span>作业与验收<small>8 次阶段检查</small></span><span class="read-dot" data-page="assessment.html"></span></a><a class="nav-link active" href="mentor.html" aria-current="page"><span class="nav-num">08</span><span>导师手册<small>分层与教学执行</small></span><span class="read-dot" data-page="mentor.html"></span></a><a class="nav-link " href="templates.html" ><span class="nav-num">09</span><span>提交模板<small>日志、报告与交接</small></span><span class="read-dot" data-page="templates.html"></span></a></nav><div class="progress-box"><div>我的阅读进度 <b id="progress-text">0 / 9</b></div><progress id="progress" max="9" value="0"></progress><small>仅保存在本机 · 非验收成绩</small><button id="reset-progress">重置阅读进度</button></div><a class="sidebar-foot" href="mentor.html">面向大四本科生 · 导师指南 ↗</a></aside><div class="scrim" id="scrim"></div><div class="workspace"><header class="topbar"><button id="menu-toggle" aria-label="展开目录" aria-expanded="false">☰</button><span class="crumb">学习中心 <span>/</span> 导师手册</span><button id="search-open"><span>⌕</span> 搜索课程内容 <kbd>/</kbd></button></header><main><div class="main-column"><header class="page-heading"><div class="eyebrow">FOUNDATIONS WIKI / 08</div><h1>导师手册</h1><p>分层与教学执行 · 目标驱动，动手验证</p></header><div class="reading-tools"><span>核心路线 · 普通笔记本可完成</span><button id="mark-read" aria-pressed="false">○ 标记本页已读</button></div><article id="article"><p><a href="index.html">首页</a> · <a href="schedule.html">日程</a> · <a href="assessment.html">验收</a> · <a href="templates.html">模板</a></p>
+<h2 id="_1">开课前准备</h2>
+<p>建议导师留出半天到一天做预演，时间不计入学生 95 小时。</p>
+<ul>
+<li>收集学生系统、CPU 架构、内存、磁盘、GPU、编程背景和每周课程冲突；确定正式开课日，再把 D1–D30 映射到日历。</li>
+<li>在一台普通 CPU Ubuntu／WSL2 上预演环境安装、digits 加载、小 MLP 训练、保存加载、ROS talker/listener 与 turtlesim。记录时长和实际包版本，发一套经过预演的环境文件。</li>
+<li>至少准备一个可远程登录的 Ubuntu 24.04 备用环境；WSL 安装失败者先继续学习。远程账号、机器人和显卡工作站是否可用要明确，不默认存在。</li>
+<li>准备资料备用入口与合法下载缓存；Python 包／数据缓存保留来源及版本。检索课程视频能否在学生网络播放；若不能，用配套讲义继续。</li>
+<li>建立班级提交目录或内部 Git 平台，说明命名、截止时间、反馈方式；不要求学生将实验室数据发到公共代码平台。</li>
+<li>建立助教答疑窗口，每周 2 次，每次约 30 分钟；同类环境问题集中解决。</li>
+</ul>
+<h2 id="d1-30">开课诊断：D1 内 30 分钟完成</h2>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>题目</th>
+<th>预期证据</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用熟悉语言写函数，求列表正数均值并处理无正数</td>
+<td>能运行的短代码</td>
+<td>判断是否需要额外编程补课</td>
+</tr>
+<tr>
+<td>说明 2×3 矩阵乘 3×1 的结果 shape</td>
+<td>2×1，并说明乘法含义</td>
+<td>判断线代复习量</td>
+</tr>
+<tr>
+<td>写出 x² 的导数，在 x=3 的值</td>
+<td>2x、6</td>
+<td>自动微分先修</td>
+</tr>
+<tr>
+<td>解释训练样本全对但新样本差的可能原因</td>
+<td>过拟合／分布变化等朴素认识</td>
+<td>判断 ML 起点，不要求术语完美</td>
+</tr>
+</tbody>
+</table></div>
+<p>若只有 Python 语法不熟但会其他语言，正常走主线。若连循环、函数都很生疏，用 D5–D8 与选做时间强化；严重欠缺时将毕业目标降为“完成环境、ML 小实验、ROS 通信”，并延长基础学习，不承诺相同 30 天达到全部终点。</p>
+<h2 id="_2">三档工作量</h2>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>档位</th>
+<th style="text-align: right;">每个标准日</th>
+<th style="text-align: right;">月总量</th>
+<th>保留／调整</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>课程紧张</td>
+<td style="text-align: right;">3 小时</td>
+<td style="text-align: right;">26×3+4×1=82 小时</td>
+<td>保留全部核心能力；给 CSV／训练／ROS 包骨架；减少自行搭框架和整理排版时间</td>
+</tr>
+<tr>
+<td>标准</td>
+<td style="text-align: right;">3.5 小时</td>
+<td style="text-align: right;">95 小时</td>
+<td>本 Wiki 默认任务量</td>
+</tr>
+<tr>
+<td>学有余力</td>
+<td style="text-align: right;">最多 4.5 小时</td>
+<td style="text-align: right;">最多 121 小时</td>
+<td>每周只加一个选做方向，不要求所有扩展都完成</td>
+</tr>
+</tbody>
+</table></div>
+<p>82 小时版的具体调整：Linux 使用给定日志，学生写处理脚本；CSV 提供字段解析骨架；ML 提供 split 工具但学生解释并检查；训练提供主函数与 CLI，学生完成 forward／训练／加载；ROS 提供包目录与 entry_points，学生完成回调和闭环。GNN 保留手算与最小代码，Isaac Sim 仅阅读。评价仍看本人能否改代码与复现，不要求同样代码行数。</p>
+<p>若学生连续两次因时间不足未通过，优先撤掉选做与额外架构工作；缓冲日只用于有限补漏。不要隐性把计划变成每天 8 小时。</p>
+<h2 id="_3">每周你要检查什么</h2>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>导师最重要的问题</th>
+<th>下周放行依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D4／D7</td>
+<td>是否能独立进入环境、运行脚本、整理错误？</td>
+<td>A1；有问题者先配备用环境</td>
+</tr>
+<tr>
+<td>D8／D11</td>
+<td>是自己理解 Python 和环境，还是照抄？是否数据泄漏？</td>
+<td>A2／A3</td>
+</tr>
+<tr>
+<td>D15／D18</td>
+<td>是否真的完成保存加载？曲线与报告能对应吗？</td>
+<td>A4／A5</td>
+</tr>
+<tr>
+<td>D24</td>
+<td>是否订阅反馈？停止条件是否真的运行？</td>
+<td>A6</td>
+</tr>
+<tr>
+<td>D26</td>
+<td>是否知道高级平台的作用和依赖边界？</td>
+<td>A7</td>
+</tr>
+<tr>
+<td>D30</td>
+<td>能否交给别人复跑？下一阶段缺口是否具体？</td>
+<td>A8 与毕设交接表</td>
+</tr>
+</tbody>
+</table></div>
+<p>每周可做 20 分钟全体总结＋每人 5–10 分钟问题抽查；正式验收按课程节点进行，重叠的总结合并。若有 N 名学生，8 次每人 12 分钟的验收约为 1.6N 小时导师工作量；另加开课准备和集中答疑。超过 8–10 人时分小组演示，但每人保留独立代码解释与现场修改。</p>
+<h2 id="_4">反馈与掉队处理</h2>
+<p>把问题分为环境阻塞、概念不懂、代码实现和时间不足。环境阻塞 45 分钟内报备，导师集中处理；概念不懂让学生用 3 行例子解释；代码实现让学生给最小复现；时间不足降低非核心范围。</p>
+<p>建议红黄绿：绿＝必过项完成；黄＝已能跑但理解／记录不足；红＝无法运行或关键逻辑错误。黄安排下一缓冲日补验；红暂停后续依赖作业，先补前置。日期可以按班级实际顺延，但要写明是延期，不把跳过标成完成。</p>
+<h2 id="ai">AI 辅助与原创要求</h2>
+<p>允许询问概念、解释报错、生成样例和审查代码。学生在报告里写明用了哪些工具、哪些部分得到帮助、做了什么验证。现场允许查 API 文档；不允许把即时生成回答替代本人解释。判断标准是理解、修改和结果可信，不通过刻意禁止工具来增加负担。</p>
+<h2 id="_5">进度看板模板</h2>
+<p>复制一行对应一名学生；状态填“未开始／进行中／待补／通过”，分数和证据链接同时保留。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>学生</th>
+<th>环境路线</th>
+<th>A1</th>
+<th>A2</th>
+<th>A3</th>
+<th>A4</th>
+<th>A5</th>
+<th>A6</th>
+<th>A7</th>
+<th>A8</th>
+<th>当前阻塞／下次检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+<td>待填</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_6">基础月后的分方向衔接</h2>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>毕设方向</th>
+<th>优先补课</th>
+<th>第一个应交的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>视觉／感知</td>
+<td>相机标定、三维几何、任务指标、目标数据集</td>
+<td>固定数据集上的可复现基线与错误分析</td>
+</tr>
+<tr>
+<td>图学习</td>
+<td>GCN/GAT、图任务、采样与评价协议</td>
+<td>小数据集基线＋一项受控消融</td>
+</tr>
+<tr>
+<td>机器人控制</td>
+<td>运动学、坐标变换、规划、平台驱动</td>
+<td>仿真中的目标动作与接口验证</td>
+</tr>
+<tr>
+<td>模仿学习／VLA</td>
+<td>episode 数据、动作表征、推理延迟、模型依赖</td>
+<td>小段离线数据跑通预处理与策略推理</td>
+</tr>
+<tr>
+<td>Isaac／真机系统</td>
+<td>具体平台版本、驱动／桥接、时钟、设备规范</td>
+<td>支持平台上的传感器与指令闭环</td>
+</tr>
+</tbody>
+</table></div>
+<p>后续学习量取决于具体课题，不能预设“基础月结束就能独立部署任意模型”。D30 由导师确认最终仓库、模型名称、硬件和实验目标，再安排下一个两周的专项计划。</p></article><div class="page-nav"><a href="assessment.html">← 作业与验收</a><a href="templates.html">提交模板 →</a></div><footer>具身智能基础训练营 · 以实践建立理解<br><small>资料核对：2026-10-26 · 阅读进度不作为作业验收记录</small></footer></div><aside class="page-toc"><div>本页导航</div><div class="toc">
+<ul>
+<li><a href="#_1">开课前准备</a></li>
+<li><a href="#d1-30">开课诊断：D1 内 30 分钟完成</a></li>
+<li><a href="#_2">三档工作量</a></li>
+<li><a href="#_3">每周你要检查什么</a></li>
+<li><a href="#_4">反馈与掉队处理</a></li>
+<li><a href="#ai">AI 辅助与原创要求</a></li>
+<li><a href="#_5">进度看板模板</a></li>
+<li><a href="#_6">基础月后的分方向衔接</a></li>
+</ul>
+</div>
+</aside></main></div><dialog id="search-dialog"><div class="search-head"><label for="search-input">搜索全部课程</label><button id="search-close" aria-label="关闭搜索">✕</button></div><input id="search-input" type="search" placeholder="例如：WSL、过拟合、A6、提交模板" autocomplete="off"><p id="search-status" aria-live="polite">输入关键词，查找课程中的内容。</p><div id="search-results"></div></dialog></body></html>

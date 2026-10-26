@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="30 天具身智能基础训练 Wiki：Linux、Python、PyTorch、视觉、ROS 2 与任务验收。"><meta name="theme-color" content="#123c35"><title>ROS 2 与具身智能 · 具身智能基础训练营</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script></head>
+<body data-page="robotics.html"><a class="skip" href="#article">跳到正文</a><aside id="sidebar"><a class="brand" href="index.html"><span class="brand-mark">E<span>↗</span></span><span>具身智能<small>基础训练营 / WIKI</small></span></a><div class="sidebar-label">LEARNING PATH · 学习路径</div><nav aria-label="课程目录"><a class="nav-link " href="index.html" ><span class="nav-num">01</span><span>开始学习<small>课程总览</small></span><span class="read-dot" data-page="index.html"></span></a><a class="nav-link " href="schedule.html" ><span class="nav-num">02</span><span>30 天日程<small>每天的学习目标</small></span><span class="read-dot" data-page="schedule.html"></span></a><a class="nav-link " href="foundations.html" ><span class="nav-num">03</span><span>Linux 与 Python<small>M1–M2 · 开发基础</small></span><span class="read-dot" data-page="foundations.html"></span></a><a class="nav-link " href="learning-vision.html" ><span class="nav-num">04</span><span>机器学习与视觉<small>M3–M5 · 实验基础</small></span><span class="read-dot" data-page="learning-vision.html"></span></a><a class="nav-link active" href="robotics.html" aria-current="page"><span class="nav-num">05</span><span>ROS 2 与具身智能<small>M6–M8 · 系统实践</small></span><span class="read-dot" data-page="robotics.html"></span></a><a class="nav-link " href="resources.html" ><span class="nav-num">06</span><span>学习资料<small>教材、文档与视频</small></span><span class="read-dot" data-page="resources.html"></span></a><a class="nav-link " href="assessment.html" ><span class="nav-num">07</span><span>作业与验收<small>8 次阶段检查</small></span><span class="read-dot" data-page="assessment.html"></span></a><a class="nav-link " href="mentor.html" ><span class="nav-num">08</span><span>导师手册<small>分层与教学执行</small></span><span class="read-dot" data-page="mentor.html"></span></a><a class="nav-link " href="templates.html" ><span class="nav-num">09</span><span>提交模板<small>日志、报告与交接</small></span><span class="read-dot" data-page="templates.html"></span></a></nav><div class="progress-box"><div>我的阅读进度 <b id="progress-text">0 / 9</b></div><progress id="progress" max="9" value="0"></progress><small>仅保存在本机 · 非验收成绩</small><button id="reset-progress">重置阅读进度</button></div><a class="sidebar-foot" href="mentor.html">面向大四本科生 · 导师指南 ↗</a></aside><div class="scrim" id="scrim"></div><div class="workspace"><header class="topbar"><button id="menu-toggle" aria-label="展开目录" aria-expanded="false">☰</button><span class="crumb">学习中心 <span>/</span> ROS 2 与具身智能</span><button id="search-open"><span>⌕</span> 搜索课程内容 <kbd>/</kbd></button></header><main><div class="main-column"><header class="page-heading"><div class="eyebrow">FOUNDATIONS WIKI / 05</div><h1>ROS 2 与具身智能</h1><p>M6–M8 · 系统实践 · 目标驱动，动手验证</p></header><div class="reading-tools"><span>核心路线 · 普通笔记本可完成</span><button id="mark-read" aria-pressed="false">○ 标记本页已读</button></div><article id="article"><p><a href="index.html">首页</a> · <a href="resources.html">资料</a> · <a href="assessment.html">验收</a></p>
+<h2 id="m6ros-2-d19d24175">M6：ROS 2 最小闭环（D19–D24，17.5 小时）</h2>
+<p>先修：Linux、Python、命令行运行与基本调试。ROS 2 是机器人软件通信与组织框架；本阶段核心是节点、消息、坐标和反馈，不要求完整 SLAM、Nav2、MoveIt 2 或机械臂动力学。</p>
+<h3 id="_1">环境路线</h3>
+<p>使用 Ubuntu 24.04 + ROS 2 Jazzy。按 R11 官方页完成 locale、软件源、开发工具和 desktop 安装。不要只复制 <code>apt install</code> 而漏掉前面的软件源配置。旧视频里的 Foxy／Humble 软件源和安装命令不直接复制到 Jazzy。</p>
+<p>安装后在两个已退出 Conda 的 Ubuntu 终端分别运行：</p>
+<pre><code class="language-bash">source /opt/ros/jazzy/setup.bash
+ros2 run demo_nodes_cpp talker
+</code></pre>
+<pre><code class="language-bash">source /opt/ros/jazzy/setup.bash
+ros2 run demo_nodes_py listener
+</code></pre>
+<p>能收到消息后再做 R12。所有课程节点先在同一台机器上运行；WSL 跨机 DDS 发现、USB 转发和机器人局域网接入不作为初学必过项。</p>
+<h3 id="_2">五个学习日的任务</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>日</th>
+<th>要掌握的概念</th>
+<th>动手与证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D19</td>
+<td>node、topic、message、发布与订阅</td>
+<td>talker/listener；用 <code>ros2 node list</code>、<code>topic list</code>、<code>topic info</code>、<code>topic echo</code> 查看</td>
+</tr>
+<tr>
+<td>D20</td>
+<td>service、位姿与速度</td>
+<td>turtlesim 键盘控制；查 <code>/turtle1/pose</code>、<code>/turtle1/cmd_vel</code> 类型；调用 reset</td>
+</tr>
+<tr>
+<td>D22</td>
+<td>package、workspace、colcon、launch</td>
+<td>创建 ament_python 包，写 pub/sub，注册 entry_points，build 后 source 工作区并启动</td>
+</tr>
+<tr>
+<td>D23</td>
+<td>参数、坐标系、闭环、录制回放</td>
+<td>从 pose 计算目标误差，发送速度；参数化目标与限速；录制 pose/cmd_vel</td>
+</tr>
+<tr>
+<td>D24</td>
+<td>故障与复现</td>
+<td>3 个目标、到点停止、输入失效停止；交 A6</td>
+</tr>
+</tbody>
+</table></div>
+<p>R13 只选坐标系、二维旋转和刚体变换概念。tf2 能说明用途即可；本月不强制构建机器人 URDF 或完整 TF 树。rosbag 回放时关闭实时发布者与会向仿真发送控制的节点，避免同一话题多个来源混淆。</p>
+<h3 id="a6">A6 控制器的具体规格</h3>
+<p>订阅 turtlesim 的 pose，计算当前位置到目标的距离 <code>d</code> 与期望朝向 <code>atan2(dy,dx)</code>。朝向误差归一化到 <code>[-π,π]</code>；误差很大时先转向，再前进。建议角速度上限 1 rad/s、线速度上限 1 仿真单位/s，到目标 0.2 单位内停止。这些只是本课程仿真参数，不是真机参数。</p>
+<p>在三个固定任务上测试：初始位姿均为 <code>(5.5,5.5,0)</code>，目标依次 <code>(8,5.5)</code>、<code>(5.5,8)</code>、<code>(3,3)</code>；每次先复位。订阅位姿后才允许运动；接收时间超过 1 秒无更新时发零速度；完成后持续发零速度。说明 turtlesim 的长度是仿真坐标单位，迁移到实际机器人时才按对应接口规定使用米。</p>
+<h3 id="_3">图形运行不了的同等路线</h3>
+<p>用系统 Python 和 rclpy 写一个无图形 <code>sim2d</code> 节点，状态为 x、y、yaw，按固定 <code>dt=0.05</code> 积分：<code>x += v*cos(yaw)*dt</code>，<code>y += v*sin(yaw)*dt</code>，<code>yaw += w*dt</code>，并归一化角度。订阅 <code>geometry_msgs/Twist</code> 的 <code>/cmd_vel</code>，发布 <code>geometry_msgs/Pose2D</code> 的 <code>/pose2d</code>；Pose2D 仅用作本课程简单二维练习接口。增加复位能力，收到速度指令超时 1 秒自行归零。</p>
+<p>该节点预计占用 D20 的动手时间；卡住时导师可发半成品骨架，学生完成积分和超时逻辑。将轨迹保存 CSV 并绘图，仍按相同闭环标准验收。它不模拟碰撞、惯性、接触和真实传感器误差，不能作为真机动力学验证。</p>
+<h2 id="m7gnn-d25d267">M7：GNN 与具身学习接口（D25–D26，7 小时）</h2>
+<h3 id="d25">D25：人人必做的最小图消息传递</h3>
+<p>阅读 R14 的图数据、节点特征、边与 message passing 概念。核心练习<strong>不安装 PyG</strong>，直接用 NumPy 或 PyTorch，减少编译扩展依赖。</p>
+<p>图为无向链 <code>0—1—2—3</code>，节点标量特征 <code>[1,2,4,8]</code>。加入自环，按每个节点“自身＋邻居”取均值：<code>H' = D^(-1)(A+I)H</code>，D 是含自环后的度矩阵。手算结果应为 <code>[1.5, 7/3, 14/3, 6]</code>。删除边 <code>1—2</code> 后重算，预期为 <code>[1.5,1.5,6,6]</code>。通过代码验证；再将特征扩成二维，解释矩阵 shape。</p>
+<p>说明这只是固定的一层聚合算子，没有可学习参数，<strong>尚不是训练好的 GNN</strong>。进一步写出 <code>H' = σ(D^(-1)(A+I)HW)</code>，指出 W 如何接受梯度。能举出机器人关节图、场景物体关系图之一，说明节点、边和特征分别代表什么；也要说明并非所有具身模型都必须用 GNN。</p>
+<p>选做：按 R14 安装 PyG，完成一个官方小例子；不把安装 PyG、跑 Cora 或通读 CS224W 作为核心合格线。需要图学习的毕设，在基础月之后单独补 1–2 周。</p>
+<h3 id="d26">D26：把“模型”放进机器人系统</h3>
+<p>R15 选读模仿学习入门，R16／R17 选看仓库结构与输入输出接口。用自己的话说明：</p>
+<ul>
+<li>observation：图像、关节／位姿等可用观测，含时间和单位约定。</li>
+<li>action：机器人执行接口所需的量，可能是关节位置、速度或末端位姿增量，不能混用。</li>
+<li>episode：一次完整交互轨迹；时序数据的训练／验证／测试应按 episode 或场景划分，不能随意随机拆相邻帧。</li>
+<li>policy：把观测映射为动作的规则或学习模型；行为克隆用示范动作作监督，强化学习利用奖励与交互。</li>
+<li>VLA：视觉、语言和动作之间的建模方向；本月理解接口，不要求训练大型模型。</li>
+</ul>
+<p>提交一张文字框图：传感器／回放 → 预处理 → 策略 → 动作转换／限幅 → 仿真或机器人 → 新观测；逐项写明 shape、频率、单位及无效输入的处理。说明一个离线预测准确率高的策略为何仍可能闭环失败。</p>
+<h3 id="isaac-sim">Isaac Sim 该学到哪里</h3>
+<p>所有学生先读 R18 的版本化硬件要求；填写版本、OS、GPU 型号与显存、内存、磁盘、驱动、数据下载条件和兼容性检查结果。没有条件的结论可以是“本机不部署，使用实验室演示／后续预约工作站”，不扣分。</p>
+<p>有预配置工作站时，导师展示：载入机器人／场景、播放暂停、查看关节、读取一次传感器输出、解释与 ROS 2 Bridge 的关系。没有工作站时，通过官方入门资料梳理同一流程，明确没有实际运行。<strong>不要求在 WSL2 内部署 Isaac Sim，也不把其他 GPU 可训练 PyTorch 等同于满足 Isaac Sim 要求。</strong></p>
+<h2 id="m8">M8：结业项目——可复现的二维到点闭环</h2>
+<p>核心路线重用 A6 控制器，新增独立观测处理节点、统一接口和实验日志；不要在最后三天从零写完整导航系统。题目是基础能力集成，最终系统可以是规则控制器，学习策略替换为选做。</p>
+<h3 id="_4">核心数据流与实现合同</h3>
+<p><code>turtlesim / sim2d 位姿 → 观测节点 → 控制节点 → 速度指令 → 仿真</code></p>
+<p>观测节点订阅位姿并与当前目标相减，发布相对目标 <code>dx,dy</code>、朝向误差和有效性；本月可使用 <code>std_msgs/Float64MultiArray</code>，约定 <code>[dx,dy,heading_error,valid]</code> 并在 README 写清顺序和单位。更规范的自定义接口是选做。控制节点用接收时间检查新鲜度，输入缺失或 valid=0 时输出零速度。观测节点本身也要检测上游位姿是否过期，不能不断重发过期的“有效观测”。</p>
+<p>建议频率 20 Hz，和 A6 使用相同的速度上限及到达阈值。启动时未收到有效观测保持停止；换目标清除上次成功状态；CSV 记录 timestamp、pose、target、distance、command、valid。用 launch 文件启动，README 至少写出准备、运行、测试、停止四条命令。</p>
+<h3 id="_5">固定测试协议</h3>
+<p>每轮最长 30 秒，以运行时的仿真时间计；在正常实时 turtlesim 中可记录单调时钟，同时声明计时方式。每轮重新设定初始位姿和目标；达到阈值 ≤0.2 且持续停止 1 秒计成功。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>初始 (x,y,yaw)</th>
+<th>目标 (x,y)</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td>(5.5,5.5,0)</td>
+<td>(8,5.5)</td>
+<td>直行</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>(5.5,5.5,0)</td>
+<td>(5.5,8)</td>
+<td>转向</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>(5.5,5.5,0)</td>
+<td>(3,3)</td>
+<td>后侧目标</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>(3,3,1.57)</td>
+<td>(8,8)</td>
+<td>较长距离</td>
+</tr>
+<tr>
+<td>T5</td>
+<td>(8,3,3.14)</td>
+<td>(3,8)</td>
+<td>斜向</td>
+</tr>
+<tr>
+<td>T6</td>
+<td>(8,8,-1.57)</td>
+<td>(3,3)</td>
+<td>另一象限</td>
+</tr>
+<tr>
+<td>T7</td>
+<td>(3,8,0)</td>
+<td>(8,3)</td>
+<td>朝向调整</td>
+</tr>
+<tr>
+<td>T8</td>
+<td>(5.5,5.5,3.14)</td>
+<td>(5.5,5.5)</td>
+<td>初始已到达</td>
+</tr>
+<tr>
+<td>T9</td>
+<td>(4,4,-3.10)</td>
+<td>(3,4.05)</td>
+<td>角度跨 ±π</td>
+</tr>
+<tr>
+<td>T10</td>
+<td>(6,6,1.0)</td>
+<td>(6.3,6.3)</td>
+<td>近距离</td>
+</tr>
+</tbody>
+</table></div>
+<p>另外做 2 项故障测试，不计入正常成功率分母：运行中暂停观测节点，检查最后有效消息 1 秒后在一个控制周期内发零速度；启动时无观测，检查始终停止。核心通过建议为正常场景 ≥8/10，故障测试 2/2，低于 8/10 可修正后复验但保留前一版结果。记录真实结果，不能先填写“预期成功”。</p>
+<h3 id="_6">选做分支：每人只选一项</h3>
+<ol>
+<li><strong>视觉闭环</strong>：在课程定义的合成二维画布中生成目标图，使用 A5 颜色定位；明确像素到仿真坐标映射，不冒充真实相机标定。</li>
+<li><strong>行为克隆</strong>：采集规则控制器的短轨迹，以相对位置／朝向为输入拟合小 MLP；按轨迹划分；比较规则控制与学习策略的闭环成功率，不能只报告动作 MSE。</li>
+<li><strong>GNN</strong>：构造物体关系图，完成一个可解释的小预测任务，展示去掉边后的变化。</li>
+<li><strong>Isaac Sim</strong>：仅在已有工作站上替换仿真端，提交实际版本与运行证据，接口不兼容时列出差异，不强行宣称迁移完成。</li>
+</ol>
+<h2 id="_7">从基础月到实际毕设</h2>
+<p>结业报告必须列出下一阶段缺口：目标模型／仓库／commit，机器人的动作接口，传感器与数据格式，算力／显存，训练还是推理，评估任务，以及谁提供设备与示范数据。若最终目标为 π 系列／其他 VLA，请先由导师确认具体名称，再按其官方版本要求搭环境；不把这里的 Python 3.11 基础环境直接复制成全部具身项目环境。</p>
+<p>真机衔接顺序：离线数据检查 → 仿真／回放接口验证 → 实验室人员确认动作单位、限位、急停和通信中断处理 → 在场监督下低速试验。基础课仿真参数不得直接当作机械臂或移动底盘参数。真实部署由实验室既有规范和设备负责人安排。</p></article><div class="page-nav"><a href="learning-vision.html">← 机器学习与视觉</a><a href="resources.html">学习资料 →</a></div><footer>具身智能基础训练营 · 以实践建立理解<br><small>资料核对：2026-10-26 · 阅读进度不作为作业验收记录</small></footer></div><aside class="page-toc"><div>本页导航</div><div class="toc">
+<ul>
+<li><a href="#m6ros-2-d19d24175">M6：ROS 2 最小闭环（D19–D24，17.5 小时）</a><ul>
+<li><a href="#_1">环境路线</a></li>
+<li><a href="#_2">五个学习日的任务</a></li>
+<li><a href="#a6">A6 控制器的具体规格</a></li>
+<li><a href="#_3">图形运行不了的同等路线</a></li>
+</ul>
+</li>
+<li><a href="#m7gnn-d25d267">M7：GNN 与具身学习接口（D25–D26，7 小时）</a><ul>
+<li><a href="#d25">D25：人人必做的最小图消息传递</a></li>
+<li><a href="#d26">D26：把“模型”放进机器人系统</a></li>
+<li><a href="#isaac-sim">Isaac Sim 该学到哪里</a></li>
+</ul>
+</li>
+<li><a href="#m8">M8：结业项目——可复现的二维到点闭环</a><ul>
+<li><a href="#_4">核心数据流与实现合同</a></li>
+<li><a href="#_5">固定测试协议</a></li>
+<li><a href="#_6">选做分支：每人只选一项</a></li>
+</ul>
+</li>
+<li><a href="#_7">从基础月到实际毕设</a></li>
+</ul>
+</div>
+</aside></main></div><dialog id="search-dialog"><div class="search-head"><label for="search-input">搜索全部课程</label><button id="search-close" aria-label="关闭搜索">✕</button></div><input id="search-input" type="search" placeholder="例如：WSL、过拟合、A6、提交模板" autocomplete="off"><p id="search-status" aria-live="polite">输入关键词，查找课程中的内容。</p><div id="search-results"></div></dialog></body></html>

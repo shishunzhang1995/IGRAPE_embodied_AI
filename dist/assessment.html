@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="30 天具身智能基础训练 Wiki：Linux、Python、PyTorch、视觉、ROS 2 与任务验收。"><meta name="theme-color" content="#123c35"><title>作业与验收 · 具身智能基础训练营</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script></head>
+<body data-page="assessment.html"><a class="skip" href="#article">跳到正文</a><aside id="sidebar"><a class="brand" href="index.html"><span class="brand-mark">E<span>↗</span></span><span>具身智能<small>基础训练营 / WIKI</small></span></a><div class="sidebar-label">LEARNING PATH · 学习路径</div><nav aria-label="课程目录"><a class="nav-link " href="index.html" ><span class="nav-num">01</span><span>开始学习<small>课程总览</small></span><span class="read-dot" data-page="index.html"></span></a><a class="nav-link " href="schedule.html" ><span class="nav-num">02</span><span>30 天日程<small>每天的学习目标</small></span><span class="read-dot" data-page="schedule.html"></span></a><a class="nav-link " href="foundations.html" ><span class="nav-num">03</span><span>Linux 与 Python<small>M1–M2 · 开发基础</small></span><span class="read-dot" data-page="foundations.html"></span></a><a class="nav-link " href="learning-vision.html" ><span class="nav-num">04</span><span>机器学习与视觉<small>M3–M5 · 实验基础</small></span><span class="read-dot" data-page="learning-vision.html"></span></a><a class="nav-link " href="robotics.html" ><span class="nav-num">05</span><span>ROS 2 与具身智能<small>M6–M8 · 系统实践</small></span><span class="read-dot" data-page="robotics.html"></span></a><a class="nav-link " href="resources.html" ><span class="nav-num">06</span><span>学习资料<small>教材、文档与视频</small></span><span class="read-dot" data-page="resources.html"></span></a><a class="nav-link active" href="assessment.html" aria-current="page"><span class="nav-num">07</span><span>作业与验收<small>8 次阶段检查</small></span><span class="read-dot" data-page="assessment.html"></span></a><a class="nav-link " href="mentor.html" ><span class="nav-num">08</span><span>导师手册<small>分层与教学执行</small></span><span class="read-dot" data-page="mentor.html"></span></a><a class="nav-link " href="templates.html" ><span class="nav-num">09</span><span>提交模板<small>日志、报告与交接</small></span><span class="read-dot" data-page="templates.html"></span></a></nav><div class="progress-box"><div>我的阅读进度 <b id="progress-text">0 / 9</b></div><progress id="progress" max="9" value="0"></progress><small>仅保存在本机 · 非验收成绩</small><button id="reset-progress">重置阅读进度</button></div><a class="sidebar-foot" href="mentor.html">面向大四本科生 · 导师指南 ↗</a></aside><div class="scrim" id="scrim"></div><div class="workspace"><header class="topbar"><button id="menu-toggle" aria-label="展开目录" aria-expanded="false">☰</button><span class="crumb">学习中心 <span>/</span> 作业与验收</span><button id="search-open"><span>⌕</span> 搜索课程内容 <kbd>/</kbd></button></header><main><div class="main-column"><header class="page-heading"><div class="eyebrow">FOUNDATIONS WIKI / 07</div><h1>作业与验收</h1><p>8 次阶段检查 · 目标驱动，动手验证</p></header><div class="reading-tools"><span>核心路线 · 普通笔记本可完成</span><button id="mark-read" aria-pressed="false">○ 标记本页已读</button></div><article id="article"><p><a href="index.html">首页</a> · <a href="schedule.html">日程</a> · <a href="templates.html">提交模板</a></p>
+<h2 id="_1">怎么验收</h2>
+<p>正式验收共 8 次，每名学生约 10–15 分钟，计入当日 3.5 小时。学生可查官方文档，但现场任务必须自己操作。课程视频、Git 提交数和截图数量都不单独计分。</p>
+<p>每次小作业按 100 分打分：功能完成 40、可复现 25、理解与现场修改 25、记录质量 10。建议 ≥70 分且满足本次“必过项”才通过。导师可记“通过／待补／未演示”，不把“交过文件”写成“通过”。补验保留原记录，避免学生因一次错误放弃后续。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>作业</th>
+<th>日期</th>
+<th style="text-align: right;">总评权重</th>
+<th>核心产出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1 Linux</td>
+<td>D4</td>
+<td style="text-align: right;">10%</td>
+<td>脚本、日志筛选、环境报告</td>
+</tr>
+<tr>
+<td>A2 Python／环境</td>
+<td>D8</td>
+<td style="text-align: right;">10%</td>
+<td>CSV 工具、Git 历史、环境复现</td>
+</tr>
+<tr>
+<td>A3 ML 基线</td>
+<td>D11</td>
+<td style="text-align: right;">15%</td>
+<td>划分、基线、无泄漏评价</td>
+</tr>
+<tr>
+<td>A4 神经网络</td>
+<td>D15</td>
+<td style="text-align: right;">15%</td>
+<td>训练／验证、checkpoint、独立推理</td>
+</tr>
+<tr>
+<td>A5 视觉</td>
+<td>D18</td>
+<td style="text-align: right;">10%</td>
+<td>颜色定位、微型 CNN、失败分析</td>
+</tr>
+<tr>
+<td>A6 ROS 2</td>
+<td>D24</td>
+<td style="text-align: right;">15%</td>
+<td>Python 包、有反馈的到点控制</td>
+</tr>
+<tr>
+<td>A7 GNN／具身</td>
+<td>D26</td>
+<td style="text-align: right;">10%</td>
+<td>图聚合、接口说明、平台条件判断</td>
+</tr>
+<tr>
+<td>A8 综合项目</td>
+<td>D30</td>
+<td style="text-align: right;">15%</td>
+<td>固定协议评估、复现、答辩</td>
+</tr>
+</tbody>
+</table></div>
+<p>结业建议：总评 ≥70 且 A1–A8 核心项全部通过。选做只写能力备注，不靠 GPU／硬件优势抬高必修分数。不能运行、错误的数据划分、无法解释主要代码，需要补验，不能被报告排版抵消。</p>
+<h2 id="a1linux">A1：Linux 科研工作目录</h2>
+<p><strong>任务</strong>：在自己的 Linux 主目录新建独立项目，编写环境报告与日志汇总脚本。脚本生成 20 行日志，其中每第 5 行为 ERROR，提取并计数错误，打包结果。任意当前工作目录下都能按 README 运行，不依赖人工预先创建临时输出。</p>
+<p><strong>提交</strong>：<code>linux/env_report.sh</code>、<code>linux/run_demo.sh</code>、完整日志、恰好 4 行错误的文件、汇总文本、README、一个排错记录。运行脚本本身就能重新生成这些输出。</p>
+<p><strong>必过项</strong>：能从终端启动；结果计数正确；能解释路径与权限；重复运行不会把旧日志追加成错误结果。无需完全脱稿记命令。</p>
+<p><strong>现场变化</strong>：导师切换工作目录，或移除执行位，要求学生识别并修复。提问：“<code>&gt;</code> 和 <code>&gt;&gt;</code> 会怎样影响这次结果？为什么不对所有文件 chmod 777？”</p>
+<p><strong>选做</strong>：支持输入日志路径，增加 <code>--help</code>。失败者在 D7 前补最小脚本，不先继续安装更多软件。</p>
+<h2 id="a2">A2：一个能交给同学复用的小工具</h2>
+<p><strong>任务</strong>：编写 CSV 汇总工具，正常／空／坏值三类输入都能清楚处理；用 NumPy 验证统计结果；保存图；管理一次 Git 分支修改；记录并复现 CPU 环境。</p>
+<p><strong>提交</strong>：脚本、3 个小输入、期望／实际输出、至少 3 个有意义的 commit、环境完整导出与 pip 版本文件、解释器路径、自检输出、重建步骤和结果。</p>
+<p><strong>必过项</strong>：不依赖 Notebook 隐藏变量；输入错误时给出可理解提示；能指出正在使用哪个 Python；同类系统新建环境后成功运行，或标注环境复验尚未完成而非提前通过。</p>
+<p><strong>现场变化</strong>：更换输入文件并改变输出路径；提问：“Windows 上装了 Anaconda，为什么 WSL 的 Python 仍可能找不到包？<code>from-history</code> 能记录所有 pip 依赖吗？”</p>
+<p><strong>选做</strong>：写一个小型自动检查脚本比较已知均值。Python 不熟者优先补函数／文件操作。</p>
+<h2 id="a3">A3：一份可信的机器学习结果</h2>
+<p><strong>任务</strong>：digits 固定 train/val/test 划分；多数类与逻辑回归基线；只在验证集选最多 2 个参数；最终报告一次测试结果。</p>
+<p><strong>提交</strong>：切分索引、代码、参数、随机种子、两种模型的指标、混淆矩阵、5 个错误样例，说明预处理 fit 在哪里发生。</p>
+<p><strong>必过项</strong>：训练／验证／测试样本不交叉；预处理没有读取验证／测试统计量；指标来自真实运行；能解释基线用途。准确率 0.90 仅作排查参考。</p>
+<p><strong>现场变化</strong>：导师指出一段“全量 fit scaler”伪代码，让学生改正确；提问：“能否根据测试集选 C？混淆矩阵哪两个数字最容易混？”</p>
+<p><strong>选做</strong>：加决策树，只比较同一划分。泄漏问题先修后验，不用再看大量算法视频。</p>
+<h2 id="a4">A4：完成一个神经网络的生命周期</h2>
+<p><strong>任务</strong>：digits 两层 MLP，保存逐轮训练／验证指标；两种学习率做单因素对照；按验证结果选 checkpoint；新进程加载、推理、最终测试。</p>
+<p><strong>提交</strong>：train/predict 入口、配置、日志 CSV、两次曲线、环境、checkpoint 获取位置、单样本结果与一页分析。权重可作为提交附件，不强制进入 Git。</p>
+<p><strong>必过项</strong>：训练循环确实更新参数；输出／标签 shape 正确；验证不参与反向传播；独立加载成功；模型选择未使用测试集。</p>
+<p><strong>现场变化</strong>：把 batch size 改小并跑 2 个 batch；提问：“少了 zero_grad 会怎样？eval 与 no_grad 有何不同？为什么只保存一张 loss 图还不够复现？”</p>
+<p><strong>选做</strong>：第二个种子或 Fashion-MNIST，二选一。</p>
+<h2 id="a5">A5：视觉输入可以被解释</h2>
+<p><strong>任务</strong>：合成圆点图中心定位；增加空图、暗光、遮挡等失败例；同一 digits 划分训练微型 CNN。</p>
+<p><strong>提交</strong>：原图／标记图、中心 CSV、保留测试的定位误差与误检、CNN shape 表、参数量、曲线、与 MLP 的同协议比较、3 个失败说明。</p>
+<p><strong>必过项</strong>：新输入可运行；无目标时显式无效；解释 BGR／RGB 与 NCHW；CNN 可保存加载；没有把像素直接当真实米坐标。无需 CNN 一定超过 MLP。</p>
+<p><strong>现场变化</strong>：换目标颜色或空白图；提问：“阈值为什么不泛化到所有光照？像素中心到机械臂末端动作还缺什么？”</p>
+<p><strong>选做</strong>：只在训练集加入图像增强，比较保留集结果。</p>
+<h2 id="a6">A6：机器人软件最小闭环</h2>
+<p><strong>任务</strong>：写 ROS 2 Python 包，订阅位姿，发布速度，完成 3 个固定目标；目标位置和速度上限可配置；做一次话题录制与分析。</p>
+<p><strong>提交</strong>：<code>ros_ws/src/</code>、launch、README、节点／话题示意、3 次轨迹与结果、rosbag 的存放说明或元信息、过期输入停止证据。</p>
+<p><strong>必过项</strong>：源码可构建并启动；用实时位姿反馈而非定时盲发速度；到点停止；无新位姿超过 1 秒后在一个控制周期内发零速度。只会键盘遥控不算通过。</p>
+<p><strong>现场变化</strong>：改目标，暂停位姿来源或在无图形路线暂停仿真节点；提问：“topic 与 service 的用途有什么不同？为什么先 source？角度误差跨 ±π 怎么处理？”</p>
+<p><strong>选做</strong>：参数动态修改或 tf2 小例子。WSL 跨机问题不在核心验收范围。</p>
+<h2 id="a7">A7：读懂具身项目，而不是只会安装</h2>
+<p><strong>任务</strong>：实现 4 节点图的聚合与删边变化；整理一页具身数据／策略接口；提交 Isaac Sim 版本条件清单。</p>
+<p><strong>提交</strong>：手算、代码、两种边结构的结果、shape 解释；observation/action/episode 表；部署条件表；明确“实际运行／文档了解／尚未验证”。</p>
+<p><strong>必过项</strong>：聚合结果正确；知道固定聚合不是训练好的 GNN；区分监督学习／模仿学习／强化学习；知道动作单位与时间对齐；能判断本机不满足某平台要求时采用什么替代路线。没有工作站不扣分。</p>
+<p><strong>现场变化</strong>：修改一个节点特征预测哪些节点会受影响；提问：“一层和两层聚合影响范围有何区别？为什么按随机帧切机器人轨迹会有泄漏风险？”</p>
+<p><strong>选做</strong>：PyG 例子或 Isaac Sim 实机演示，二选一。</p>
+<h2 id="a8">A8：可复现的综合小项目</h2>
+<p><strong>任务</strong>：按机器人模块定义完成观测处理→控制→二维仿真的系统；10 个固定正常场景与 2 项失效测试；同学复跑；完成答辩与毕设衔接计划。</p>
+<p><strong>提交</strong>：完整仓库与 commit、环境记录、启动命令、固定场景配置、逐次 CSV、成功率／耗时／误差汇总、故障结果、2 分钟录屏或现场演示、2–3 页报告。</p>
+<p><strong>必过项</strong>：另一位同学按 README 能启动；正常场景 ≥8/10、故障测试 2/2；阐明适用范围和仿真局限；能现场改一个目标或阈值；结果可追溯。网络或包下载阻碍复跑时记录具体阻塞，不能直接认定复现成功。</p>
+<p><strong>答辩结构</strong>：5 分钟目标／方法／结果，5 分钟运行，5 分钟修改／问答。提问：“如果换成真实相机和机械臂，需要改哪些接口、检查哪些单位？如果控制器替换成学习策略，评价协议如何保留？”</p>
+<p><strong>补验</strong>：保留原始失败 CSV，修改后重新运行整套固定场景，报告版本差异；不能只重跑失败的场景后混合成一份成绩。</p>
+<h2 id="_2">日常微验收</h2>
+<p>D1 环境可进入；D3 日志过滤；D6 shape 与 Git diff；D10 划分解释；D13 保存加载；D16 无目标处理；D20 话题类型；D22 节点构建。每次 5–10 分钟，可同伴检查；正式验收仍由导师抽查。导师可随机让学生解释两行代码，定位“能运行但不理解”的问题。</p></article><div class="page-nav"><a href="resources.html">← 学习资料</a><a href="mentor.html">导师手册 →</a></div><footer>具身智能基础训练营 · 以实践建立理解<br><small>资料核对：2026-10-26 · 阅读进度不作为作业验收记录</small></footer></div><aside class="page-toc"><div>本页导航</div><div class="toc">
+<ul>
+<li><a href="#_1">怎么验收</a></li>
+<li><a href="#a1linux">A1：Linux 科研工作目录</a></li>
+<li><a href="#a2">A2：一个能交给同学复用的小工具</a></li>
+<li><a href="#a3">A3：一份可信的机器学习结果</a></li>
+<li><a href="#a4">A4：完成一个神经网络的生命周期</a></li>
+<li><a href="#a5">A5：视觉输入可以被解释</a></li>
+<li><a href="#a6">A6：机器人软件最小闭环</a></li>
+<li><a href="#a7">A7：读懂具身项目，而不是只会安装</a></li>
+<li><a href="#a8">A8：可复现的综合小项目</a></li>
+<li><a href="#_2">日常微验收</a></li>
+</ul>
+</div>
+</aside></main></div><dialog id="search-dialog"><div class="search-head"><label for="search-input">搜索全部课程</label><button id="search-close" aria-label="关闭搜索">✕</button></div><input id="search-input" type="search" placeholder="例如：WSL、过拟合、A6、提交模板" autocomplete="off"><p id="search-status" aria-live="polite">输入关键词，查找课程中的内容。</p><div id="search-results"></div></dialog></body></html>

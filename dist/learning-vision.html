@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="30 天具身智能基础训练 Wiki：Linux、Python、PyTorch、视觉、ROS 2 与任务验收。"><meta name="theme-color" content="#123c35"><title>机器学习与视觉 · 具身智能基础训练营</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script></head>
+<body data-page="learning-vision.html"><a class="skip" href="#article">跳到正文</a><aside id="sidebar"><a class="brand" href="index.html"><span class="brand-mark">E<span>↗</span></span><span>具身智能<small>基础训练营 / WIKI</small></span></a><div class="sidebar-label">LEARNING PATH · 学习路径</div><nav aria-label="课程目录"><a class="nav-link " href="index.html" ><span class="nav-num">01</span><span>开始学习<small>课程总览</small></span><span class="read-dot" data-page="index.html"></span></a><a class="nav-link " href="schedule.html" ><span class="nav-num">02</span><span>30 天日程<small>每天的学习目标</small></span><span class="read-dot" data-page="schedule.html"></span></a><a class="nav-link " href="foundations.html" ><span class="nav-num">03</span><span>Linux 与 Python<small>M1–M2 · 开发基础</small></span><span class="read-dot" data-page="foundations.html"></span></a><a class="nav-link active" href="learning-vision.html" aria-current="page"><span class="nav-num">04</span><span>机器学习与视觉<small>M3–M5 · 实验基础</small></span><span class="read-dot" data-page="learning-vision.html"></span></a><a class="nav-link " href="robotics.html" ><span class="nav-num">05</span><span>ROS 2 与具身智能<small>M6–M8 · 系统实践</small></span><span class="read-dot" data-page="robotics.html"></span></a><a class="nav-link " href="resources.html" ><span class="nav-num">06</span><span>学习资料<small>教材、文档与视频</small></span><span class="read-dot" data-page="resources.html"></span></a><a class="nav-link " href="assessment.html" ><span class="nav-num">07</span><span>作业与验收<small>8 次阶段检查</small></span><span class="read-dot" data-page="assessment.html"></span></a><a class="nav-link " href="mentor.html" ><span class="nav-num">08</span><span>导师手册<small>分层与教学执行</small></span><span class="read-dot" data-page="mentor.html"></span></a><a class="nav-link " href="templates.html" ><span class="nav-num">09</span><span>提交模板<small>日志、报告与交接</small></span><span class="read-dot" data-page="templates.html"></span></a></nav><div class="progress-box"><div>我的阅读进度 <b id="progress-text">0 / 9</b></div><progress id="progress" max="9" value="0"></progress><small>仅保存在本机 · 非验收成绩</small><button id="reset-progress">重置阅读进度</button></div><a class="sidebar-foot" href="mentor.html">面向大四本科生 · 导师指南 ↗</a></aside><div class="scrim" id="scrim"></div><div class="workspace"><header class="topbar"><button id="menu-toggle" aria-label="展开目录" aria-expanded="false">☰</button><span class="crumb">学习中心 <span>/</span> 机器学习与视觉</span><button id="search-open"><span>⌕</span> 搜索课程内容 <kbd>/</kbd></button></header><main><div class="main-column"><header class="page-heading"><div class="eyebrow">FOUNDATIONS WIKI / 04</div><h1>机器学习与视觉</h1><p>M3–M5 · 实验基础 · 目标驱动，动手验证</p></header><div class="reading-tools"><span>核心路线 · 普通笔记本可完成</span><button id="mark-read" aria-pressed="false">○ 标记本页已读</button></div><article id="article"><p><a href="index.html">首页</a> · <a href="resources.html">资料</a> · <a href="assessment.html">验收</a></p>
+<h2 id="m3d9d11">M3：机器学习最小完整实验（D9–D11）</h2>
+<p>先修：能写 Python 函数、读 CSV、理解数组 shape。目标：明白“从数据拟合模型，再对未参与拟合的数据评价”的流程，能够识别数据泄漏。</p>
+<p>主线资料：R08 的线性回归、模型选择／过拟合；R09 的 estimator、preprocessing、Pipeline、model evaluation。复习矩阵乘法、均值／方差、导数／梯度、概率与条件概率；够用即可，不先补一整学期数学。</p>
+<p><strong>任务一，D9</strong>：生成带噪声的 <code>y=2x+1</code> 数据，拟合一条直线，画拟合图和残差图，比较估计参数与生成参数。说明噪声存在时为什么不要求每个点都落在直线上。</p>
+<p><strong>任务二，D10–D11</strong>：使用 <code>sklearn.datasets.load_digits()</code>，无需另下载数据集。它是小规模 8×8 手写数字数据，适合普通 CPU。固定种子 42，分层划分 train/val/test=60/20/20，保存每个 split 的样本索引，以便 MLP／CNN 共用。</p>
+<p>建 <code>DummyClassifier</code> 多数类基线和 <code>StandardScaler → LogisticRegression</code> 的 Pipeline；缩放器只能在训练集拟合。先在训练集 fit，再在验证集比较至多 2 个参数设置；选定设置并冻结后只报告一次测试集结果。测试集不参加“反复换参数直到满意”。</p>
+<p>提交 <code>split.json</code>、配置、混淆矩阵、准确率、5 个错误样例与原始结果。准确率 0.90 可作诊断参考，<strong>不作唯一评分线</strong>；若明显偏低，应检查数据／标签、划分、收敛警告及预处理。不得删掉错误样本以提高分数。</p>
+<p>核心口述：分类与回归有什么区别？为什么训练精度高不一定泛化好？标准化为什么不能用整个数据集先拟合？标签不平衡时只看 accuracy 有何问题？</p>
+<p>选做：比较决策树，观察深度变化；这不替代核心数据流程。</p>
+<h2 id="m4d12d15">M4：亲手训练神经网络（D12–D15）</h2>
+<p>主线读 R07 Learn the Basics 中 tensor、autograd、Dataset/DataLoader、Build Model、Optimization、Save/Load；R08 只挑 MLP 与过拟合部分。先照官方示例理解，再改为本课程 digits 数据；不要求抄完整教程。</p>
+<h3 id="_1">模型与训练预算</h3>
+<ul>
+<li>输入 64 维，MLP 为 <code>64 → 64 → 10</code>，中间 ReLU；输出 logits，不提前 softmax 再交给 <code>CrossEntropyLoss</code>。</li>
+<li>像素除以 16 做固定尺度变换；若学习额外预处理参数，只能在训练集估计。</li>
+<li>batch size 64，CPU，先跑 2 个 batch 的 smoke test，再最多 20 epoch。单次完整训练预算不超过 10 分钟；超时先减少 epoch 并记录硬件与实际时长。</li>
+<li>日志包含 seed、epoch、train_loss、val_loss、val_accuracy；只用验证集选择 checkpoint。测试集留到配置冻结之后。</li>
+</ul>
+<p>D12 写网络并打印 <code>batch×64 → batch×64 → batch×10</code>；计算 <code>f(x)=x²</code> 在 x=3 的梯度并与 autograd 对照。D13 写训练循环，说明 <code>zero_grad → forward → loss → backward → step</code>，保存 checkpoint，建立独立 <code>predict.py</code>。D15 只改变学习率，比较两次验证曲线并解释现象。</p>
+<p>推理要 <code>model.eval()</code> 与 <code>torch.no_grad()</code>；说明 eval 控制某些层的行为，no_grad 控制梯度记录，两者不是同一个开关。checkpoint 至少记录模型参数、模型结构所需配置及预处理规则；恢复训练另需 optimizer 等状态，本月可选做。</p>
+<p><strong>A4 交付</strong>：训练命令、推理命令、配置、环境记录、逐轮 CSV、曲线、权重位置、最终测试结果。现场从新 Python 进程加载模型，输入一张已知测试图输出类别；不能以 Notebook 内存里已有的模型冒充成功加载。</p>
+<p>选做 Fashion-MNIST：先用 5,000 张训练样本、1,000 张验证样本跑 3 epoch；数据需要联网缓存。只与相同数据划分的同类模型比较，不和 digits 指标混在一张“性能排名”里。</p>
+<h2 id="m5d16d18">M5：视觉与机器人观测（D16–D18）</h2>
+<p>本模块有两条小任务：理解可解释的图像处理，以及理解 CNN 的输入与计算。不要在 3 天内额外训练大型检测模型。</p>
+<h3 id="v1">任务 V1：彩色目标定位</h3>
+<p>读 R10 的图像读写、颜色空间、阈值、轮廓。自己生成或用绘图工具绘制 10 张 320×240 的圆点图，记录真实中心坐标，其中 2 张不含目标。颜色、大小和位置变化即可，不需要下载真实机器人数据。</p>
+<p>写脚本：读图 → BGR 转 HSV → 阈值 → 轮廓 → 最大有效目标的中心 → 保存带标记图与 CSV。无目标时输出 <code>valid=false</code>，不得保留上次中心充当本次检测。解释像素坐标的原点、横纵轴与宽高；像素坐标不能不经几何建模直接当作机器人世界坐标。</p>
+<p>用 5 张图调阈值，另外 5 张作为保留测试。评价：有目标图的像素中心误差；无目标图的误检数。保留集上中心误差 ≤5 像素可作合成数据的参考目标，颜色或遮挡变化失败时保留失败证据。D18 额外加入暗光、近似背景色和遮挡样例，解释至少 3 种失败现象。</p>
+<h3 id="v2-cnn">任务 V2：微型 CNN</h3>
+<p>用 A3 同一个 digits 划分，输入 <code>N×1×8×8</code>；建议 <code>Conv2d(1,8,3,padding=1) → ReLU → MaxPool2d(2) → Flatten → Linear(8×4×4,10)</code>。读 R08 的卷积、填充／步幅、通道、池化。训练不超过 20 epoch，使用与 MLP 相同的评价协议。</p>
+<p>交每层输出 shape、参数量、训练时长和验证／测试指标。可以出现 CNN 不如 MLP 的结果；只要实验一致、原因分析合理就不扣“没超过前一个模型”的分。小数据上的一次成绩不代表架构普遍优劣。</p>
+<p><strong>A5 现场</strong>：给一张新图运行 V1；解释 RGB/BGR、NCHW；展示 V2 的加载和推理；说明从图像定位到实际机械臂动作还缺标定、坐标变换、状态估计与控制。</p>
+<h2 id="_2">数据与实验共同规则</h2>
+<p>记录数据来源、代码版本、随机种子、切分索引和预处理。多次试验用验证集选方案；不要每次改代码都查看测试集。若必须修改最终方案，明确原测试集已被使用，并重新建立评价协议。小样本和单种子结论仅适用于本次练习，不能写成算法优越性的研究结论。</p>
+<p>通过这三个模块意味着能开展小规模实验；距离目标检测、三维视觉、姿态估计、视觉语言模型仍有专项学习距离，结业后按毕设方向补。</p></article><div class="page-nav"><a href="foundations.html">← Linux 与 Python</a><a href="robotics.html">ROS 2 与具身智能 →</a></div><footer>具身智能基础训练营 · 以实践建立理解<br><small>资料核对：2026-10-26 · 阅读进度不作为作业验收记录</small></footer></div><aside class="page-toc"><div>本页导航</div><div class="toc">
+<ul>
+<li><a href="#m3d9d11">M3：机器学习最小完整实验（D9–D11）</a></li>
+<li><a href="#m4d12d15">M4：亲手训练神经网络（D12–D15）</a><ul>
+<li><a href="#_1">模型与训练预算</a></li>
+</ul>
+</li>
+<li><a href="#m5d16d18">M5：视觉与机器人观测（D16–D18）</a><ul>
+<li><a href="#v1">任务 V1：彩色目标定位</a></li>
+<li><a href="#v2-cnn">任务 V2：微型 CNN</a></li>
+</ul>
+</li>
+<li><a href="#_2">数据与实验共同规则</a></li>
+</ul>
+</div>
+</aside></main></div><dialog id="search-dialog"><div class="search-head"><label for="search-input">搜索全部课程</label><button id="search-close" aria-label="关闭搜索">✕</button></div><input id="search-input" type="search" placeholder="例如：WSL、过拟合、A6、提交模板" autocomplete="off"><p id="search-status" aria-live="polite">输入关键词，查找课程中的内容。</p><div id="search-results"></div></dialog></body></html>
